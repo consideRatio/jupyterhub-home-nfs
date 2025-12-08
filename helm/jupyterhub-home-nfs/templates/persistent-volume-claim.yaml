@@ -12,7 +12,8 @@ spec:
   resources:
     requests:
       storage: {{ .Values.persistentVolume.size }}
-  storageClassName: {{ .Values.persistentVolume.storageClass }}
+  {{/* Quoting is important as empty string is treated differently than null here */}}
+  storageClassName: {{ .Values.persistentVolume.storageClass | quote }}
   {{- if or .Values.eks.enabled .Values.gke.enabled .Values.openstack.enabled}}
   volumeName: {{ .Release.Name }}-{{ include "jupyterhub-home-nfs.home-nfs.fullname" . }}
   {{- end }}
