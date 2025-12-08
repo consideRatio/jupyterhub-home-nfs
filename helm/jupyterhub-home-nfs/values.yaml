@@ -85,6 +85,7 @@ quotaEnforcer:
 # We expose disk total usage + some other disk metrics with prometheus
 # node exporter
 nodeExporter:
+  enabled: true
   image:
     repository: quay.io/prometheus/node-exporter
     tag: v1.8.2

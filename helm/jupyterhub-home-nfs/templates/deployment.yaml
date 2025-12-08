@@ -87,6 +87,7 @@ spec:
           mountPath: /export
         resources: {{ toJson .Values.autoResizer.resources }}
       {{- end }}
+      {{ if .Values.nodeExporter.enabled }}
       - name: node-exporter
         image: "{{ .Values.nodeExporter.image.repository }}:{{ .Values.nodeExporter.image.tag }}"
         args:
@@ -104,6 +105,7 @@ spec:
           mountPath: /shared-volume
           readOnly: true
         resources: {{ toJson .Values.nodeExporter.resources }}
+      {{- end }}
       {{- with .Values.extraContainers }}
       {{- tpl (. | toYaml) $ | nindent 6 }}
       {{- end }}
