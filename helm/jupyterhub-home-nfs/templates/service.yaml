@@ -17,6 +17,7 @@ spec:
   selector:
     app: nfs-server
 ---
+{{ if .Values.nodeExporter.enabled }}
 apiVersion: v1
 kind: Service
 metadata:
@@ -36,6 +37,7 @@ spec:
   selector:
     app: nfs-server
 ---
+{{- end }}
 apiVersion: v1
 kind: Service
 metadata:
